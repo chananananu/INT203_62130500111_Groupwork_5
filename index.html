@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meowmeow</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CDN -->
+    <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- Material Icon CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar-light bg-white shadow-sm" style="font-family: 'Kanit', sans-serif">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="text-2xl font-bold ">Photo Gallery ({{countPhoto}}) | Like : {{likeAmount}}</p>
+                        </div>
+                    </div>
+                    <!-- Search -->
+                    <button class="material-icons" v-if="search==''" @click="toggleSearch">search</button>
+                    <div class="input-group" v-show="search">
+                        <input type="text" class="form-control" placeholder="Please enter text for searching photos"
+                            v-model="searchCat">
+                        <button class="btn btn-outline-secondary" @click="toggleSearch">Cancle</button>
+                    </div>
+                </div>
+            </nav>
+        </nav>
+
+        <!-- Content -->
+        <div class="flex justify-center pt-3">
+            <div class="card w-72 shadow-md py-2" v-if="showImg">
+                <div class="pl-3 pb-2 text-lg inline-block" v-if="showImg"
+                    style="font-family: 'K2D', sans-serif; font-size: 18px;">
+                    {{cats[currentIndex].name }}
+                </div>
+                <button class="material-icons absolute ml-64" @click="close()">highlight_off</button>
+                <img :src="cats[currentIndex].image">
+            </div>
+        </div>
+
+
+        <div class="flex justify-center bg-white text-xl rounded font-medium">
+
+            <div class="flex justify-center gap-12 py-7 flex-wrap">
+                <div v-for="(cat,index) in inputSearch">
+                    <div class="card w-72 py-2 shadow-md">
+                        <div class="pl-3" style="font-family: 'K2D', sans-serif; font-size: 18px;">
+                            <img :src="cat.profile" class="rounded-circle inline-block mr-2" width="35">{{cat.name}}
+                        </div>
+                        <img :src="cat.image" class="relative flex py-2" @click="imgClicked(cat.id)" />
+                        <div @click="clickLike(index)" :class="{like: cat.like}">
+                            <div class="pl-3">
+                                <button class="material-icons">favorite</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p v-if="notFound">Oops! we couldn't find what are you looking for meow!...</p>
+            </div>
+
+
+
+        </div>
+        <script src="./main.js"></script>
+</body>
+
+</html>
