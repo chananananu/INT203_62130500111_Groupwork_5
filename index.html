@@ -32,7 +32,7 @@
                 </div>
             </nav>
         </nav>
-        <photo-view :cats="cats" :search-cat="searchCat" :show-img="showImg" :cat-id="currentIndex" @show-image="imgClicked" @close-image="closeImg"></photo-view>
+        <photo-view :cats="cats" :search-cat="searchCat" :cat-id="currentIndex" :show-img="showImg" @show-image="imgClicked" @close-image="closeImg"></photo-view>
         <photo-list :cats="cats" :search-cat="searchCat" :not-found="notFound" @click-like="clickLike" @show-image="imgClicked"></photo-list>
 
 

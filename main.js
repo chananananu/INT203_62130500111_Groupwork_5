@@ -63,7 +63,7 @@ const app = Vue.createApp({
         this.currentIndex = index;
         this.showImg = true;
     },
-    close() {
+    closeImg() {
         this.showImg = false;
     },
     searchText(searchText) {

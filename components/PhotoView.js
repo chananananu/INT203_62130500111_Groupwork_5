@@ -7,7 +7,6 @@ app.component('photo-view', {
     emits:[
         'close-image'
     ],
-    
     template:
         /*html*/
         `                   
