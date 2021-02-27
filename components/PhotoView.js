@@ -1,28 +1,32 @@
-app.component('photo-view'{
+app.component('photo-view', {
     props: {
-        cats: {
-            type: Array,
-            require: true
-        },
-        'show-images': Boolean
+        'search-cat': Array,
+        'cat-id': Number,
+        'show-img': Boolean
     },
+    emits:[
+        'close-image'
+    ],
+    
     template:
-    /*html*/
-    `
-    <div class="flex justify-center pt-3">
+        /*html*/
+        `                   
+        <div class="flex justify-center pt-3">
             <div class="card w-72 shadow-md py-2" v-if="showImg">
                 <div class="pl-3 pb-2 text-lg inline-block" v-if="showImg"
                     style="font-family: 'K2D', sans-serif; font-size: 18px;">
-                    {{cats[currentIndex].name }}
+                    {{searchCat[catId].name}}
                 </div>
-                <button class="material-icons absolute ml-64" @click="close()">highlight_off</button>
-                <img :src="cats[currentIndex].image">
+                <button class="material-icons absolute ml-64" @click="closeImg">highlight_off</button>
+                <img :src="searchCat[catId].image">
             </div>
         </div>
-    `,
+        `,
     methods: {
-        close() {
-            this.$emit('close', this.showImages);
+        closeImg(){
+            this.$emit('close-image');
         }
+       
     }
+
 })
