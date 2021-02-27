@@ -25,22 +25,38 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <div class="text-2xl font-bold ">Photo Gallery ({{countPhoto}}) | Like : {{likeAmount}}</p>
-                        </div>
+                        <div class="text-2xl font-bold ">Photo Gallery ({{countPhoto}}) | Like : {{likeAmount}}</div>
                     </div>
-                    <!-- Search -->
+                    <photo-search :cats="cats" @toggle-search="toggleSearch" @search-text="searchText"></photo-search>
+                </div>
+            </nav>
+        </nav>
+        <photo-view></photo-view>
+        <photo-list :cats="cats" :not-found="notFound" :search-cat="searchCat" @click-like="clickLike" @img-clicked="imgClicked" @show-images="showImages"></photo-list>
+        
+        <!-- Search -->
+        <!-- <nav class="navbar-light bg-white shadow-sm" style="font-family: 'Kanit', sans-serif">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="text-2xl font-bold ">Photo Gallery ({{countPhoto}}) | Like : {{likeAmount}}</div>
+                    </div>
+
+                    input Search
                     <button class="material-icons" v-if="search==''" @click="toggleSearch">search</button>
                     <div class="input-group" v-show="search">
                         <input type="text" class="form-control" placeholder="Please enter text for searching photos"
                             v-model="searchCat">
                         <button class="btn btn-outline-secondary" @click="toggleSearch">Cancle</button>
                     </div>
+
                 </div>
             </nav>
-        </nav>
+        </nav> -->
 
-        <!-- Content -->
-        <div class="flex justify-center pt-3">
+        <!-- View -->
+
+        <!-- <div class="flex justify-center pt-3">
             <div class="card w-72 shadow-md py-2" v-if="showImg">
                 <div class="pl-3 pb-2 text-lg inline-block" v-if="showImg"
                     style="font-family: 'K2D', sans-serif; font-size: 18px;">
@@ -49,18 +65,18 @@
                 <button class="material-icons absolute ml-64" @click="close()">highlight_off</button>
                 <img :src="cats[currentIndex].image">
             </div>
-        </div>
+        </div> -->
 
 
-        <div class="flex justify-center bg-white text-xl rounded font-medium">
-
+        <!-- List -->
+        <!-- <div class="flex justify-center bg-white text-xl rounded font-medium">
             <div class="flex justify-center gap-12 py-7 flex-wrap">
                 <div v-for="(cat,index) in inputSearch">
                     <div class="card w-72 py-2 shadow-md">
                         <div class="pl-3" style="font-family: 'K2D', sans-serif; font-size: 18px;">
                             <img :src="cat.profile" class="rounded-circle inline-block mr-2" width="35">{{cat.name}}
                         </div>
-                        <img :src="cat.image" class="relative flex py-2" @click="imgClicked(cat.id)" />
+                            <img :src="cat.image" class="relative flex py-2" @click="imgClicked(cat.id)" />
                         <div @click="clickLike(index)" :class="{like: cat.like}">
                             <div class="pl-3">
                                 <button class="material-icons">favorite</button>
@@ -70,11 +86,16 @@
                 </div>
                 <p v-if="notFound">Oops! we couldn't find what are you looking for meow!...</p>
             </div>
+        </div> -->
+    </div>
+    <script src="./main.js"></script>
+    <script src="./components/PhotoSearch.js"></script>
+    <script src="./components/PhotoList.js"></script>
+    <script src="./components/PhotoView.js"></script>
 
-
-
-        </div>
-        <script src="./main.js"></script>
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
 </body>
 
 </html>

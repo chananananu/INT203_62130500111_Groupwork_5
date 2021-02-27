@@ -1,4 +1,4 @@
-const app = {
+const app = Vue.createApp({
     data() {
         return {
             cats: [{
@@ -45,29 +45,33 @@ const app = {
                 }
             ],
             search: false,
-            searchCat: '',
+            inputSearch: '',
             notFound: false,
-            showImg: false,
-            currentIndex: 0
-
+            currentIndex: 0,
+            showImagesStatus: false
 
         }
     },
     methods: {
-        clickLike(index) {
-            this.cats[index].like = !this.cats[index].like;
+        // clickLike(index) {
+        //     this.cats[index].like = !this.cats[index].like;
+        // },
+        // toggleSearch() {
+        //     this.search = !this.search;
+        // },
+
+        imgClicked(index) {
+            this.currentIndex = index;
         },
-        toggleSearch() {
-            this.search = !this.search;
+        showImages(showImg){
+            this.showImagesStatus = showImg;
         },
         close() {
-            this.showImg = false;
+            this.showImagesStatus = false;
         },
-        imgClicked(index) {
-            this.showImg = true;
-            this.currentIndex = index;
-        }
-
+        searchText(searchText) {
+            this.inputSearch = searchText;
+        },
 
     },
 
@@ -79,12 +83,12 @@ const app = {
             return this.cats.filter(n => n.like).length;
         },
 
-        inputSearch() {
+        searchCat() {
             this.notFound = false;
             if (this.inputSearch == '') {
                 return this.cats;
             } else {
-                picCat = this.cats.filter(p => p.name.includes(this.searchCat.toLowerCase()));
+                picCat = this.cats.filter(p => p.name.includes(this.inputSearch.toLowerCase()));
 
                 if (picCat == '') {
                     this.notFound = true;
@@ -97,6 +101,4 @@ const app = {
 
     }
 
-}
-
-Vue.createApp(app).mount('#app');
+})
