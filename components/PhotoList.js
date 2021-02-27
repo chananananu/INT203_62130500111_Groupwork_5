@@ -1,5 +1,7 @@
 app.component('photo-list', {
     props: {
+        cats: {
+            type: Array,
             require: true
         },
         'not-found': Boolean,
